@@ -2,9 +2,12 @@
 
 This project was originally designed to check out the following API-methods functionality:
 
-http://www.wkda.de/papi/v1/car-types/manufacturer (http://www.wkda.de/papi/v1/car-types/manufacturer), 
-http://www.wkda.de/papi/v1/car-types/main-types?manufacturer= (http://www.wkda.de/papi/v1/car-types/main-types?manufacturer=){manufacturer}
-http://www.wkda.de/papi/v1/car-types (http://www.wkda.de/papi/v1/car-types/main-types?manufacturer=)/built-dates?manufacturer={manufacturer}&main-type={mainType}
+http://www.wkda.de/papi/v1/car-types/manufacturer (http://www.wkda.de/papi/v1/car-types/manufacturer),
+
+http://www.wkda.de/papi/v1/car-types/main-types?manufacturer= (http://www.wkda.de/papi/v1/car-types/main-types?manufacturer=){manufacturer},
+
+http://www.wkda.de/papi/v1/car-types (http://www.wkda.de/papi/v1/car-types/main-types?manufacturer=)/built-dates?manufacturer={manufacturer}&main-type={mainType},
+
 http://www.wkda.de/papi/v1/car-types/main-types-details?manufacturer={manufacturer}&main-type={mainType}&built-date={builtYear}&body-type={bodyType} (http://www.wkda.de/papi/v1/car-types/main-types-details?manufacturer=%7Bmanufacturer%7D&main-type=%7BmainType%7D&built-date=%7BbuiltYear%7D&body-type=%7BbodyType%7D)
 
 1) For instance,
