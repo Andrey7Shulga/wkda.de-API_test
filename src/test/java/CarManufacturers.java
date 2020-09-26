@@ -9,9 +9,8 @@ import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
+import pogo.responses.Dates;
 import pogo.responses.Manufacturers;
 
 import java.util.List;
@@ -19,14 +18,15 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
+import static org.assertj.core.api.InstanceOfAssertFactories.DATE;
 import static org.hamcrest.Matchers.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarManufacturers extends BaseTest {
 
-    private static final String URL_KEY = "http://www.wkda.de/papi/v1/car-types/";
     private final String manufacturer = "107";
     private final String manufacturerTitle = "Bentley";
     private final String mainType = "Azure";
@@ -42,6 +42,7 @@ public class CarManufacturers extends BaseTest {
 
 
     @Test
+    @Order(1)
     public void completeRequestTest() {
 
         response =
@@ -63,6 +64,7 @@ public class CarManufacturers extends BaseTest {
     }
 
     @Test
+    @Order(2)
     public void manufacturerRequest() {
 
         Manufacturers manufacturers = core.get_AndGetResponseAsClass(
@@ -76,36 +78,35 @@ public class CarManufacturers extends BaseTest {
     }
 
     @Test
+    @Order(3)
     public void maintypesManufacturerRequest() {
 
-        given()
-            .when()
-                .get(EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer)))
-            .then()
-                .statusCode(HTTP_OK)
-                .body(Matchers.hasItems())
-                .body("totalPageCount", equalTo(1))
-                .body("wkda.Azure", equalTo(mainType));
+        Manufacturers manufacturers = core.get_AndGetResponseAsClass(
+                Manufacturers.class,
+                reqSpec,
+                EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer)));
+
+        assertThat(manufacturers.totalPageCount).isEqualTo(1);
+        assertThat(manufacturers.wkda.get(mainType)).isEqualTo(mainType);
 
     }
 
     @Test
+    @Order(4)
     public void builtDatesRequest() {
 
-        given()
-            .when()
-                .get(EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
-                        + EndpointURLmanufacturer.MANUFACTURER.getPath() + "=%s&main-type=%s", manufacturer, mainType)))
-            .then()
-                .statusCode(HTTP_OK)
-                .body(Matchers.hasItems())
-                .body("wkda", Matchers.isA(Object.class))
-                .body("wkda.2001", equalTo("2001"));
+        Dates dates = core.get_AndGetResponseAsClass(
+                Dates.class,
+                reqSpec,
+                EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
+                        + EndpointURLmanufacturer.MANUFACTURER.getPath() + "=%s&main-type=%s", manufacturer, mainType)));
 
+        assertThat(dates.wkda.get("2001")).isEqualTo("2001");
 
     }
 
     @Test
+    @Order(5)
     public void newManufacturerPost() {
 
         RequestSpecification request = RestAssured.given();
