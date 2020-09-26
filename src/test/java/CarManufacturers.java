@@ -3,6 +3,7 @@ import api.client.EndpointURLmainTypes;
 import api.client.EndpointURLmainTypesDetails;
 import api.client.EndpointURLmanufacturer;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
@@ -10,13 +11,20 @@ import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import pogo.responses.Manufacturers;
+
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class CarManufacturers {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class CarManufacturers extends BaseTest {
 
     private static final String URL_KEY = "http://www.wkda.de/papi/v1/car-types/";
     private final String manufacturer = "107";
@@ -33,43 +41,37 @@ public class CarManufacturers {
     private final String newManufacturerTitle = "GAZ";
 
 
-
-
-    @BeforeAll
-    public static void beforeTest() {
-
-        RestAssured.baseURI = URL_KEY;
-
-    }
-
     @Test
     public void completeRequestTest() {
 
-        given()
+        response =
+            given()
+                .spec(reqSpec)
+            .when()
+                .get(EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS
+                        .addPath(String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s"
+                    , manufacturer, mainType, builtDate, bodyType)));
 
-        .when()
-                .get(EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS.addPath(String
-                    .format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s"
-                    , manufacturer, mainType, builtDate, bodyType)))
-        .then()
-                .statusCode(HTTP_OK)
+//        Assert.assertEquals(response.jsonPath().get("wkda['" + responseModelOne + "']"), responseModelOneBody);
 
-                .body(Matchers.hasItems())
-                .body("wkda['" + responseModelOne + "']", equalTo(responseModelOneBody))
-                .body("wkda['" + responseModelTwo + "']", equalTo(responseModelTwoBody));
+        Map<String, String> jsonPathEvaulator = response.jsonPath().get("wkda");
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+        assertThat(jsonPathEvaulator.get(responseModelOne)).isEqualTo(responseModelOneBody);
+        assertThat(jsonPathEvaulator.get(responseModelTwo)).isEqualTo(responseModelTwoBody);
 
     }
 
     @Test
     public void manufacturerRequest() {
 
-        given()
-            .when()
-                .get(EndpointURLmanufacturer.MANUFACTURER.getPath())
-            .then()
-                .statusCode(HTTP_OK)
-                .body(Matchers.hasItems())
-                .body("wkda." + manufacturer, equalTo(manufacturerTitle));
+        Manufacturers manufacturers = core.get_AndGetResponseAsClass(
+                Manufacturers.class,
+                reqSpec,
+                EndpointURLmanufacturer.MANUFACTURER.getPath());
+
+        assertThat(manufacturers.wkda.get(manufacturer)).isEqualTo(manufacturerTitle);
+
 
     }
 
