@@ -7,11 +7,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSenderOptions;
 import io.restassured.specification.RequestSpecification;
+import org.junit.Assert;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -148,6 +150,26 @@ public class Core {
     public File filePath (String path) {
 
         return new File(path);
+
+    }
+
+    public void jsonResponceResearchAssertKeyValue(Response resp, String key, String value, boolean bln) {
+
+        JsonPath jsonPathEvaulator = resp.jsonPath();
+        List<Map<String, ?>> jsonResponseRoot = jsonPathEvaulator.getList("$." + key);
+
+        for (Map<String, ?> i : jsonResponseRoot) {
+            Assert.assertTrue(i.containsKey(key));
+            Assert.assertEquals(i.containsValue(value), bln);
+
+        }
+
+    }
+
+    public void jsonResponceAssertKeyValue(Response resp, String path, String key, String value) {
+
+        String jsonPathEvaulator = resp.jsonPath().getString(path);
+        Assert.assertTrue(jsonPathEvaulator.contains(key + ":" + value));
 
     }
 
