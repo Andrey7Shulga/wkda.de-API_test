@@ -1,14 +1,9 @@
 import api.client.Core;
 import api.client.Requests;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
-
-import java.util.List;
-import java.util.Map;
 
 
 public class BaseTest extends Requests {
@@ -31,8 +26,5 @@ public class BaseTest extends Requests {
 
 
     }
-
-
-
 
 }
