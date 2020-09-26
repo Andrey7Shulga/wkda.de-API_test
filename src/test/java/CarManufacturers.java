@@ -45,21 +45,15 @@ public class CarManufacturers extends BaseTest {
     @Order(1)
     public void completeRequestTest() {
 
-        response =
-            given()
-                .spec(reqSpec)
-            .when()
-                .get(EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS
-                        .addPath(String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s"
-                    , manufacturer, mainType, builtDate, bodyType)));
+        Dates mainTypes = core.get_AndGetResponseAsClass(
+                Dates.class,
+                reqSpec,
+                EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS.addPath(
+                        String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
+                                manufacturer, mainType, builtDate, bodyType)));
 
-//        Assert.assertEquals(response.jsonPath().get("wkda['" + responseModelOne + "']"), responseModelOneBody);
-
-        Map<String, String> jsonPathEvaulator = response.jsonPath().get("wkda");
-
-        assertThat(response.getStatusCode()).isEqualTo(200);
-        assertThat(jsonPathEvaulator.get(responseModelOne)).isEqualTo(responseModelOneBody);
-        assertThat(jsonPathEvaulator.get(responseModelTwo)).isEqualTo(responseModelTwoBody);
+        assertThat(mainTypes.wkda.get(responseModelOne)).isEqualTo(responseModelOneBody);
+        assertThat(mainTypes.wkda.get(responseModelTwo)).isEqualTo(responseModelTwoBody);
 
     }
 
