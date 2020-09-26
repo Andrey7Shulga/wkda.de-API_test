@@ -2,24 +2,13 @@ import api.client.EndpointURLbuiltDates;
 import api.client.EndpointURLmainTypes;
 import api.client.EndpointURLmainTypesDetails;
 import api.client.EndpointURLmanufacturer;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.hamcrest.Matchers;
-import org.json.simple.JSONObject;
-import org.junit.Assert;
+import createData.AddNewManufacturer;
 import org.junit.jupiter.api.*;
+import pogo.requests.NewManufacturer;
 import pogo.responses.Dates;
 import pogo.responses.Manufacturers;
 
-import java.util.List;
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
-import static java.net.HttpURLConnection.HTTP_OK;
-import static org.assertj.core.api.InstanceOfAssertFactories.DATE;
-import static org.hamcrest.Matchers.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -37,8 +26,6 @@ public class CarManufacturers extends BaseTest {
     private static final String responseModelOneBody = "Azure 6.8 V8 Biturbo (336 kW / 457 PS)";
     private final String responseModelTwo = "6.8 V8:299.00";
     private final String responseModelTwoBody = "Azure 6.8 V8 (299 kW / 407 PS)";
-    private final String newManufacturerID = "603";
-    private final String newManufacturerTitle = "GAZ";
 
 
     @Test
@@ -99,35 +86,21 @@ public class CarManufacturers extends BaseTest {
 
     }
 
+//    @Disabled("Until API is developed")
     @Test
     @Order(5)
     public void newManufacturerPost() {
 
-        RequestSpecification request = RestAssured.given();
-        JSONObject requestParams = new JSONObject();
-        int statusCode;
-        String successCode;
+        AddNewManufacturer anm = new AddNewManufacturer();
+        NewManufacturer nm = anm.createNewWKDA();
 
-        //add key-value pair
-        requestParams.put("wkda." + newManufacturerID, newManufacturerTitle);
-
-        //a header stating the request body is a JSON
-        request.header("Content-Type", "application/json");
-
-        //add the JSON to the request body
-        request.body(requestParams.toJSONString());
-
-        //post the request
-        Response response = request.post(EndpointURLmanufacturer.MANUFACTURER.getPath());
-
-        //get the response status code to assert
-        statusCode = response.getStatusCode();
-        Assert.assertEquals("201", statusCode);
-
-        //get the response success code to assert
-        successCode = response.jsonPath().get("SuccessCode");
-        System.out.println("Success code is: " + successCode);
-        Assert.assertEquals("Correct Success code was returned", "OPERATION_SUCCESS", successCode);
+        given()
+                .spec(reqSpec)
+                .body(nm)
+        .when()
+                .post(EndpointURLmanufacturer.MANUFACTURER.getPath())
+        .then()
+                .statusCode(200);
 
     }
 
