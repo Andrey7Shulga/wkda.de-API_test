@@ -10,22 +10,26 @@ import pogo.responses.Manufacturers;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CarManufacturers extends BaseTest {
+public class Tests extends BaseTest {
 
-    private final String manufacturer = "107";
-    private final String manufacturerTitle = "Bentley";
-    private final String mainType = "Azure";
-    private final String builtDate = "2007";
-    private final String bodyType = "1007";
+    private static final String manufacturer = "107";
+    private static final String manufacturerTitle = "Bentley";
+    private static final String mainType = "Azure";
+    private static final String builtDate = "2007";
+    private static final String bodyType = "1007";
+
+    private static final String newModelID = "603";
+    private static final String newModelName = "GAZ";
 
     private static final String responseModelOne = "6.8 V8 Biturbo:336.00";
     private static final String responseModelOneBody = "Azure 6.8 V8 Biturbo (336 kW / 457 PS)";
-    private final String responseModelTwo = "6.8 V8:299.00";
-    private final String responseModelTwoBody = "Azure 6.8 V8 (299 kW / 407 PS)";
+    private static final String responseModelTwo = "6.8 V8:299.00";
+    private static final String responseModelTwoBody = "Azure 6.8 V8 (299 kW / 407 PS)";
 
 
     @Test
@@ -80,7 +84,8 @@ public class CarManufacturers extends BaseTest {
                 Dates.class,
                 reqSpec,
                 EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
-                        + EndpointURLmanufacturer.MANUFACTURER.getPath() + "=%s&main-type=%s", manufacturer, mainType)));
+                        + EndpointURLmanufacturer.MANUFACTURER.getPath()
+                        + "=%s&main-type=%s", manufacturer, mainType)));
 
         assertThat(dates.wkda.get("2001")).isEqualTo("2001");
 
@@ -92,7 +97,7 @@ public class CarManufacturers extends BaseTest {
     public void newManufacturerPost() {
 
         AddNewManufacturer anm = new AddNewManufacturer();
-        NewManufacturer nm = anm.createNewWKDA();
+        NewManufacturer nm = anm.createNewWKDA(newModelID, newModelName);
 
         given()
                 .spec(reqSpec)
@@ -100,7 +105,8 @@ public class CarManufacturers extends BaseTest {
         .when()
                 .post(EndpointURLmanufacturer.MANUFACTURER.getPath())
         .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("message", is("Successfully added"));
 
     }
 

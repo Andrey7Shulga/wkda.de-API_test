@@ -7,10 +7,7 @@ import java.util.Map;
 
 public class AddNewManufacturer {
 
-    public final String key = "603";
-    public final String value = "GAZ";
-
-        public NewManufacturer createNewWKDA() {
+        public NewManufacturer createNewWKDA(String key, String value) {
 
         Map<String, String> newManufacturer = new HashMap<>();
         newManufacturer.put(key, value);
