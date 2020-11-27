@@ -22,9 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="914f4baa-f83a-44be-98d9-5fe77626bb28" name="Default Changelist" comment="some improvements..">
-      <change beforePath="$PROJECT_DIR$/src/main/java/createData/AddNewManufacturer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/createData/AddNewManufacturer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CarManufacturers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
+    <list default="true" id="914f4baa-f83a-44be-98d9-5fe77626bb28" name="Default Changelist" comment="getting out data from AddNewManufacturer class">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/createData/AddNewManufacturer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/createData/AddNewManufacturer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Tests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Tests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="api" />
+    </key>
   </component>
   <component name="RunManager" selected="JUnit.Tests">
     <configuration name="Tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -76,11 +84,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.completeRequestTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.builtDatesRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DiplomAPI" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="completeRequestTest" />
+      <option name="METHOD_NAME" value="builtDatesRequest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -119,10 +127,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Tests" />
+        <item itemvalue="JUnit.Tests.builtDatesRequest" />
         <item itemvalue="JUnit.Tests.newManufacturerPost" />
         <item itemvalue="JUnit.Tests.maintypesManufacturerRequest" />
         <item itemvalue="JUnit.Tests.manufacturerRequest" />
-        <item itemvalue="JUnit.Tests.completeRequestTest" />
       </list>
     </recent_temporary>
   </component>
@@ -177,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601146525366</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="getting out data from AddNewManufacturer class">
+      <created>1601797761214</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601797761214</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,36 +214,49 @@
     <MESSAGE value="create Data for POST request" />
     <MESSAGE value="some improvements" />
     <MESSAGE value="some improvements.." />
-    <option name="LAST_COMMIT_MESSAGE" value="some improvements.." />
+    <MESSAGE value="getting out data from AddNewManufacturer class" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting out data from AddNewManufacturer class" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="296" key="GridCell.Tab.0.bottom" timestamp="1601796675157">
+    <state x="628" y="434" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1601797894542">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601796675157" />
-    <state width="1877" height="296" key="GridCell.Tab.0.center" timestamp="1601796675157">
+    <state x="628" y="434" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601797894542" />
+    <state x="756" y="401" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1601797945280">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="296" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601796675157" />
-    <state width="1877" height="296" key="GridCell.Tab.0.left" timestamp="1601796675157">
+    <state x="756" y="401" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1601797945280" />
+    <state width="1877" height="443" key="GridCell.Tab.0.bottom" timestamp="1606506023769">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="296" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601796675157" />
-    <state width="1877" height="296" key="GridCell.Tab.0.right" timestamp="1601796675157">
+    <state width="1877" height="443" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606506023769" />
+    <state width="1877" height="443" key="GridCell.Tab.0.center" timestamp="1606506023769">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="296" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601796675157" />
+    <state width="1877" height="443" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606506023769" />
+    <state width="1877" height="443" key="GridCell.Tab.0.left" timestamp="1606506023769">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="443" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606506023769" />
+    <state width="1877" height="443" key="GridCell.Tab.0.right" timestamp="1606506023769">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="443" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606506023769" />
     <state x="490" y="174" key="Maven.ArtifactSearchDialog" timestamp="1601131920134">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="174" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601131920134" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1601132605087">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1602224039982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601132605087" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1601146536692">
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602224039982" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1601797781584">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601146536692" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601797781584" />
+    <state x="776" y="298" key="chooseDestDirectoryDialog" timestamp="1601797937329">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="776" y="298" key="chooseDestDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601797937329" />
   </component>
 </project>

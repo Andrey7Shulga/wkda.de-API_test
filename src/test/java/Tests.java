@@ -87,7 +87,10 @@ public class Tests extends BaseTest {
                         + EndpointURLmanufacturer.MANUFACTURER.getPath()
                         + "=%s&main-type=%s", manufacturer, mainType)));
 
-        assertThat(dates.wkda.get("2001")).isEqualTo("2001");
+        for (int i = 1995; i < 2011; i++) {
+            assertThat(dates.wkda.get(Integer.toString(i))).isEqualTo(Integer.toString(i));
+
+        }
 
     }
 
@@ -105,7 +108,7 @@ public class Tests extends BaseTest {
         .when()
                 .post(EndpointURLmanufacturer.MANUFACTURER.getPath())
         .then()
-                .statusCode(200)
+                .statusCode(404)
                 .body("message", is("Successfully added"));
 
     }
