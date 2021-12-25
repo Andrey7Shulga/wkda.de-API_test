@@ -21,9 +21,5 @@ public class Requests {
                 .addFilter(new ResponseLoggingFilter())
                 .addFilter(new RequestLoggingFilter())
                 .build();
-
     }
-
-
-
 }

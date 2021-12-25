@@ -11,6 +11,5 @@ public enum  EndpointURLbuiltDates {
 
     public String addPath(String additionalPath) {
         return path + additionalPath;
-
     }
 }
