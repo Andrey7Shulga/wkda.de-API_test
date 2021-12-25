@@ -3,7 +3,6 @@ package api.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
-import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSenderOptions;
@@ -19,10 +18,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class Core {
-
-    private RequestSenderOptions rso;
 
     public   <T> T post_AndGetResponseAsClass(Class<T> responseclass, RequestSpecification rs, Object obj, String endpoint) {
         return

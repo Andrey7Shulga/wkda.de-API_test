@@ -42,8 +42,8 @@ public class Tests extends BaseTest {
                         String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
                                 manufacturer, mainType, builtDate, bodyType)));
 
-        assertThat(mainTypes.wkda.get(responseModelOne)).isEqualTo(responseModelOneBody);
-        assertThat(mainTypes.wkda.get(responseModelTwo)).isEqualTo(responseModelTwoBody);
+        assertThat(mainTypes.getWkda().get(responseModelOne)).isEqualTo(responseModelOneBody);
+        assertThat(mainTypes.getWkda().get(responseModelTwo)).isEqualTo(responseModelTwoBody);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class Tests extends BaseTest {
                 EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
                         + EndpointURLmanufacturer.MANUFACTURER.getPath()
                         + "=%s&main-type=%s", manufacturer, mainType)));
-        assertThat(dates.wkda.get("2001")).isEqualTo("2001");
+        assertThat(dates.getWkda().get("2001")).isEqualTo("2001");
     }
 
     @Test

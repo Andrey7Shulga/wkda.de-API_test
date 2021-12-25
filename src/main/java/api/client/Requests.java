@@ -8,8 +8,8 @@ import io.restassured.specification.RequestSpecification;
 
 public class Requests {
 
-    private final String BASE_URI = "http://www.wkda.de/papi/v1/car-types/";
-    private final String APP_HEADER = "application/json";
+    private final static String BASE_URI = "http://www.wkda.de/papi/v1/car-types/";
+    private final static String APP_HEADER = "application/json";
 
     public RequestSpecification baseRequestSpec() {
 
