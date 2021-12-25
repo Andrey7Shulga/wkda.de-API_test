@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Tests extends BaseTest {
@@ -30,7 +29,6 @@ public class Tests extends BaseTest {
     private static final String responseModelOneBody = "Azure 6.8 V8 Biturbo (336 kW / 457 PS)";
     private static final String responseModelTwo = "6.8 V8:299.00";
     private static final String responseModelTwoBody = "Azure 6.8 V8 (299 kW / 407 PS)";
-
 
     @Test
     @Order(1)
@@ -53,7 +51,7 @@ public class Tests extends BaseTest {
                 Manufacturers.class,
                 reqSpec,
                 EndpointURLmanufacturer.MANUFACTURER.getPath());
-        assertThat(manufacturers.wkda.get(manufacturer)).isEqualTo(manufacturerTitle);
+        assertThat(manufacturers.getWkda().get(manufacturer)).isEqualTo(manufacturerTitle);
     }
 
     @Test
@@ -64,8 +62,8 @@ public class Tests extends BaseTest {
                 reqSpec,
                 EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer)));
 
-        assertThat(manufacturers.totalPageCount).isEqualTo(1);
-        assertThat(manufacturers.wkda.get(mainType)).isEqualTo(mainType);
+        assertThat(manufacturers.getTotalPageCount()).isEqualTo(1);
+        assertThat(manufacturers.getWkda().get(mainType)).isEqualTo(mainType);
 
     }
 
