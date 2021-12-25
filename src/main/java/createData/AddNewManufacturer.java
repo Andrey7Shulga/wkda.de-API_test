@@ -12,9 +12,6 @@ public class AddNewManufacturer {
         Map<String, String> newManufacturer = new HashMap<>();
         newManufacturer.put(key, value);
 
-        return new NewManufacturer()
-                .setWkda(newManufacturer);
-
+        return new NewManufacturer().setWkda(newManufacturer);
     }
-
 }

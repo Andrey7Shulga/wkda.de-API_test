@@ -35,7 +35,6 @@ public class Tests extends BaseTest {
     @Test
     @Order(1)
     public void completeRequestTest() {
-
         Dates mainTypes = core.get_AndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
@@ -45,27 +44,21 @@ public class Tests extends BaseTest {
 
         assertThat(mainTypes.wkda.get(responseModelOne)).isEqualTo(responseModelOneBody);
         assertThat(mainTypes.wkda.get(responseModelTwo)).isEqualTo(responseModelTwoBody);
-
     }
 
     @Test
     @Order(2)
     public void manufacturerRequest() {
-
         Manufacturers manufacturers = core.get_AndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
                 EndpointURLmanufacturer.MANUFACTURER.getPath());
-
         assertThat(manufacturers.wkda.get(manufacturer)).isEqualTo(manufacturerTitle);
-
-
     }
 
     @Test
     @Order(3)
     public void maintypesManufacturerRequest() {
-
         Manufacturers manufacturers = core.get_AndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
@@ -79,23 +72,19 @@ public class Tests extends BaseTest {
     @Test
     @Order(4)
     public void builtDatesRequest() {
-
         Dates dates = core.get_AndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
                 EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
                         + EndpointURLmanufacturer.MANUFACTURER.getPath()
                         + "=%s&main-type=%s", manufacturer, mainType)));
-
         assertThat(dates.wkda.get("2001")).isEqualTo("2001");
-
     }
 
-//    @Disabled("Until API is developed")
     @Test
     @Order(5)
+    @Disabled("Disabled until API is developed")
     public void newManufacturerPost() {
-
         AddNewManufacturer anm = new AddNewManufacturer();
         NewManufacturer nm = anm.createNewWKDA(newModelID, newModelName);
 
@@ -107,7 +96,5 @@ public class Tests extends BaseTest {
         .then()
                 .statusCode(200)
                 .body("message", is("Successfully added"));
-
     }
-
 }

@@ -3,6 +3,7 @@ package api.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
+import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSenderOptions;
@@ -23,9 +24,7 @@ public class Core {
 
     private RequestSenderOptions rso;
 
-
     public   <T> T post_AndGetResponseAsClass(Class<T> responseclass, RequestSpecification rs, Object obj, String endpoint) {
-
         return
                 given()
                         .spec(rs)
@@ -35,11 +34,9 @@ public class Core {
                 .then()
                         .statusCode(200)
                         .extract().as(responseclass);
-
     }
 
     public   <T> T get_AndGetResponseAsClass(Class<T> responseclass, RequestSpecification rs, String endpoint) {
-
         return
                 given()
                         .spec(rs)
@@ -48,7 +45,6 @@ public class Core {
                 .then()
                         .statusCode(200)
                         .extract().as(responseclass);
-
     }
 
 
@@ -63,34 +59,31 @@ public class Core {
     }
 
     public Response get_getStandartResponse(RequestSpecification rs, String token, String endpoint) {
-
         return
                 given()
                         .spec(rs)
                         .header("token", token)
-                        .when()
+                .when()
                         .get(endpoint);
 
     }
 
     public Response post_getStandartResponse(RequestSpecification rs, String token, String endpoint) {
-
         return
                 given()
                         .spec(rs)
                         .header("token", token)
-                        .when()
+                .when()
                         .post(endpoint);
 
     }
 
     public Response delete_getStandartResponse(RequestSpecification rs, String token, String endpoint) {
-
         return
                 given()
                         .spec(rs)
                         .header("token", token)
-                        .when()
+                .when()
                         .delete(endpoint);
 
     }
@@ -108,7 +101,6 @@ public class Core {
     }
 
     public Response post_getBodyResponse (RequestSpecification rs, String token, String endpoint, Object obj) {
-
         return
                 given()
                         .spec(rs)
@@ -118,8 +110,6 @@ public class Core {
                         .post(endpoint);
 
     }
-
-
 
     public <T, responseclass> List<T> get_AndGetResponseAsListOfClass
             (Class<T> responseclass, RequestSpecification rs, String token, String endpoint) throws IOException {
@@ -138,19 +128,12 @@ public class Core {
                         .extract().as(JsonNode.class);
 
         List<responseclass> list = mapper.readValue(String.valueOf(jsonNode), listType);
-//        LOGGER.debug("class name: {}", list.get(0).getClass().getName());
-
         return (List<T>) list;
 
     }
 
-
-
-
     public File filePath (String path) {
-
         return new File(path);
-
     }
 
     public void jsonResponceResearchAssertKeyValue(Response resp, String key, String value, boolean bln) {
@@ -161,13 +144,10 @@ public class Core {
         for (Map<String, ?> i : jsonResponseRoot) {
             Assert.assertTrue(i.containsKey(key));
             Assert.assertEquals(i.containsValue(value), bln);
-
         }
-
     }
 
     public void jsonResponceAssertKeyValue(Response resp, String path, String key, String value) {
-
         String jsonPathEvaulator = resp.jsonPath().getString(path);
         Assert.assertTrue(jsonPathEvaulator.contains(key + ":" + value));
 

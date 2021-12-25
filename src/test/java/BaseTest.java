@@ -12,19 +12,12 @@ public class BaseTest extends Requests {
     protected RequestSpecification reqSpec;
     protected Core core;
 
-    public BaseTest () {
-
-        core = new Core();
-    }
+    public BaseTest () {core = new Core();}
 
     @BeforeAll
     void setup () {
-
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-
         reqSpec = baseRequestSpec();
-
-
     }
 
 }
