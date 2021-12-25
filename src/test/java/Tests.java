@@ -33,12 +33,13 @@ public class Tests extends BaseTest {
     @Test
     @Order(1)
     public void completeRequestTest() {
-        Dates mainTypes = core.get_AndGetResponseAsClass(
+        Dates mainTypes = core.getAndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
                 EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS.addPath(
                         String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
-                                manufacturer, mainType, builtDate, bodyType)));
+                                manufacturer, mainType, builtDate, bodyType))
+        );
 
         assertThat(mainTypes.getWkda().get(responseModelOne)).isEqualTo(responseModelOneBody);
         assertThat(mainTypes.getWkda().get(responseModelTwo)).isEqualTo(responseModelTwoBody);
@@ -47,20 +48,22 @@ public class Tests extends BaseTest {
     @Test
     @Order(2)
     public void manufacturerRequest() {
-        Manufacturers manufacturers = core.get_AndGetResponseAsClass(
+        Manufacturers manufacturers = core.getAndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
-                EndpointURLmanufacturer.MANUFACTURER.getPath());
+                EndpointURLmanufacturer.MANUFACTURER.getPath()
+        );
         assertThat(manufacturers.getWkda().get(manufacturer)).isEqualTo(manufacturerTitle);
     }
 
     @Test
     @Order(3)
     public void maintypesManufacturerRequest() {
-        Manufacturers manufacturers = core.get_AndGetResponseAsClass(
+        Manufacturers manufacturers = core.getAndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
-                EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer)));
+                EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer))
+        );
 
         assertThat(manufacturers.getTotalPageCount()).isEqualTo(1);
         assertThat(manufacturers.getWkda().get(mainType)).isEqualTo(mainType);
@@ -70,12 +73,13 @@ public class Tests extends BaseTest {
     @Test
     @Order(4)
     public void builtDatesRequest() {
-        Dates dates = core.get_AndGetResponseAsClass(
+        Dates dates = core.getAndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
                 EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
                         + EndpointURLmanufacturer.MANUFACTURER.getPath()
-                        + "=%s&main-type=%s", manufacturer, mainType)));
+                        + "=%s&main-type=%s", manufacturer, mainType))
+        );
         assertThat(dates.getWkda().get("2001")).isEqualTo("2001");
     }
 

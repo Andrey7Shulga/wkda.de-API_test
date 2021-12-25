@@ -3,11 +3,13 @@ package api.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
+import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSenderOptions;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
+import pogo.responses.Dates;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,28 +22,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Core {
 
-    public   <T> T post_AndGetResponseAsClass(Class<T> responseclass, RequestSpecification rs, Object obj, String endpoint) {
+    public <T> T requestAndGetResponseAsClass(Class<T> responseClass, RequestSpecification rs, Object obj, String endpoint, Method method) {
         return
                 given()
                         .spec(rs)
-                        .body(obj)
+                        .body(obj == null ? "[]" : obj)
                 .when()
-                        .post(endpoint)
+                        .request(method, endpoint)
                 .then()
                         .statusCode(200)
-                        .extract().as(responseclass);
+                        .extract().as(responseClass);
     }
 
-    public   <T> T get_AndGetResponseAsClass(Class<T> responseclass, RequestSpecification rs, String endpoint) {
-        return
-                given()
-                        .spec(rs)
-                .when()
-                        .get(endpoint)
-                .then()
-                        .statusCode(200)
-                        .extract().as(responseclass);
+
+    public <T> T getAndGetResponseAsClass(Class<T> responseClass, RequestSpecification rs, String endpoint) {
+        return requestAndGetResponseAsClass(responseClass, rs, null, endpoint, Method.GET);
     }
+
+    public <T> T postAndGetResponseAsClass(Class<T> responseClass, RequestSpecification rs, Object obj, String endpoint) {
+        return requestAndGetResponseAsClass(responseClass, rs, obj, endpoint, Method.POST);
+    }
+
 
 
 
@@ -148,5 +149,6 @@ public class Core {
         Assert.assertTrue(jsonPathEvaulator.contains(key + ":" + value));
 
     }
+
 
 }
