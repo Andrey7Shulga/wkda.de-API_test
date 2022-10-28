@@ -1,14 +1,12 @@
 package api.client;
 
-public enum  EndpointURLmainTypesDetails {
-
+public enum EndPointUrlMainTypesDetails {
     MAIN_TYPES_DETAILS("main-types-details");
-    String path;
+    final String path;
 
-    EndpointURLmainTypesDetails(String path) {this.path = path;}
+    EndPointUrlMainTypesDetails(String path) {this.path = path;}
 
     public String getPath() {return path;}
-
     public String addPath(String additionalPath) {
         return path + additionalPath;
     }

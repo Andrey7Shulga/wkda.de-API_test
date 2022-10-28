@@ -1,14 +1,13 @@
 package api.client;
 
-public enum EndpointURLmanufacturer {
+public enum EndPointUrlManufacturer {
 
     MANUFACTURER("manufacturer");
-    String path;
+    final String path;
 
-    EndpointURLmanufacturer(String path) {this.path = path;}
+    EndPointUrlManufacturer(String path) {this.path = path;}
 
     public String getPath() {return path;}
-
     public String addPath(String additionalPath) {
         return path + additionalPath;
     }

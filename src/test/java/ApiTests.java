@@ -1,7 +1,7 @@
-import api.client.EndpointURLbuiltDates;
+import api.client.EndPointUrlBuiltDates;
 import api.client.EndpointURLmainTypes;
-import api.client.EndpointURLmainTypesDetails;
-import api.client.EndpointURLmanufacturer;
+import api.client.EndPointUrlMainTypesDetails;
+import api.client.EndPointUrlManufacturer;
 import createData.AddNewManufacturer;
 import org.junit.jupiter.api.*;
 import pogo.requests.NewManufacturer;
@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Tests extends BaseTest {
+public class ApiTests extends BaseTest {
 
     private static final String manufacturer = "107";
     private static final String manufacturerTitle = "Bentley";
@@ -36,7 +36,7 @@ public class Tests extends BaseTest {
         Dates mainTypes = core.getAndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
-                EndpointURLmainTypesDetails.MAIN_TYPES_DETAILS.addPath(
+                EndPointUrlMainTypesDetails.MAIN_TYPES_DETAILS.addPath(
                         String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
                                 manufacturer, mainType, builtDate, bodyType))
         );
@@ -51,14 +51,14 @@ public class Tests extends BaseTest {
         Manufacturers manufacturers = core.getAndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
-                EndpointURLmanufacturer.MANUFACTURER.getPath()
+                EndPointUrlManufacturer.MANUFACTURER.getPath()
         );
         assertThat(manufacturers.getWkda().get(manufacturer)).isEqualTo(manufacturerTitle);
     }
 
     @Test
     @Order(3)
-    public void maintypesManufacturerRequest() {
+    public void mainTypesManufacturerRequest() {
         Manufacturers manufacturers = core.getAndGetResponseAsClass(
                 Manufacturers.class,
                 reqSpec,
@@ -76,8 +76,8 @@ public class Tests extends BaseTest {
         Dates dates = core.getAndGetResponseAsClass(
                 Dates.class,
                 reqSpec,
-                EndpointURLbuiltDates.BUILT_DATES.addPath(String.format("?"
-                        + EndpointURLmanufacturer.MANUFACTURER.getPath()
+                EndPointUrlBuiltDates.BUILT_DATES.addPath(String.format("?"
+                        + EndPointUrlManufacturer.MANUFACTURER.getPath()
                         + "=%s&main-type=%s", manufacturer, mainType))
         );
         assertThat(dates.getWkda().get("2001")).isEqualTo("2001");
@@ -94,7 +94,7 @@ public class Tests extends BaseTest {
                 .spec(reqSpec)
                 .body(nm)
         .when()
-                .post(EndpointURLmanufacturer.MANUFACTURER.getPath())
+                .post(EndPointUrlManufacturer.MANUFACTURER.getPath())
         .then()
                 .statusCode(200)
                 .body("message", is("Successfully added"));
