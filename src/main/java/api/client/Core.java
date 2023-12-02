@@ -15,19 +15,29 @@ import static io.restassured.RestAssured.given;
 
 public class Core {
 
-    public <T> T requestAndGetResponseAsClass(Class<T> responseClass, RequestSpecification rs, Object obj, String endpoint, Method method) {
+    public <T> T requestAndGetResponseAsClass(
+        Class<T> responseClass,
+        RequestSpecification rs,
+        Object obj,
+        String endpoint,
+        Method method
+    ) {
         return
-                given()
-                        .spec(rs)
-                        .body(obj == null ? "[]" : obj)
-                .when()
-                        .request(method, endpoint)
-                .then()
-                        .statusCode(200)
-                        .extract().as(responseClass);
+            given()
+                .spec(rs)
+                .body(obj == null ? "[]" : obj)
+            .when()
+                .request(method, endpoint)
+            .then()
+                .statusCode(200)
+                .extract().as(responseClass);
     }
 
-    public <T> T getAndGetResponseAsClass(Class<T> responseClass, RequestSpecification rs, String endpoint) {
+    public <T> T getAndGetResponseAsClass(
+        Class<T> responseClass,
+        RequestSpecification rs,
+        String endpoint
+    ) {
         return requestAndGetResponseAsClass(responseClass, rs, null, endpoint, Method.GET);
     }
 
@@ -43,7 +53,7 @@ public class Core {
                 .header("token", token)
             .when()
                 .request(method, endpoint)
-                .then();
+            .then();
     }
 
     public ValidatableResponse responseWithBody(
@@ -54,32 +64,32 @@ public class Core {
         Object obj
     ) {
         return
-                given()
-                        .spec(rs)
-                        .header("token", token)
-                        .body(obj)
-                .when()
-                        .request(method, endpoint)
-                .then();
+            given()
+                .spec(rs)
+                .header("token", token)
+                .body(obj)
+            .when()
+                .request(method, endpoint)
+            .then();
     }
 
     public <T, responseClass> List<T> get_AndGetResponseAsListOfClass(
-            Class<T> responseClass,
-            RequestSpecification rs,
-            String token,
-            String endpoint
+        Class<T> responseClass,
+        RequestSpecification rs,
+        String token,
+        String endpoint
     ) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         CollectionType listType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, responseClass);
         JsonNode jsonNode =
-                given()
-                        .spec(rs)
-                        .header("token", token)
-                        .when()
-                        .get(endpoint)
-                        .then()
-                        .statusCode(200)
-                        .extract().as(JsonNode.class);
+            given()
+                .spec(rs)
+                .header("token", token)
+            .when()
+                .get(endpoint)
+            .then()
+                .statusCode(200)
+                .extract().as(JsonNode.class);
         List<responseClass> list = mapper.readValue(String.valueOf(jsonNode), listType);
         return (List<T>) list;
     }

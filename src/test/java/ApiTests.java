@@ -1,5 +1,5 @@
 import api.client.EndPointUrlBuiltDates;
-import api.client.EndpointURLmainTypes;
+import api.client.EndPointUrlMainTypes;
 import api.client.EndPointUrlMainTypesDetails;
 import api.client.EndPointUrlManufacturer;
 import createData.AddNewManufacturer;
@@ -34,11 +34,11 @@ public class ApiTests extends BaseTest {
     @Order(1)
     public void completeRequestTest() {
         Dates mainTypes = core.getAndGetResponseAsClass(
-                Dates.class,
-                reqSpec,
-                EndPointUrlMainTypesDetails.MAIN_TYPES_DETAILS.addPath(
-                        String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
-                                manufacturer, mainType, builtDate, bodyType))
+            Dates.class,
+            reqSpec,
+            EndPointUrlMainTypesDetails.MAIN_TYPES_DETAILS.addPath(
+                String.format("?manufacturer=%s&main-type=%s&built-date=%s&body-type=%s",
+                    manufacturer, mainType, builtDate, bodyType))
         );
 
         assertThat(mainTypes.getWkda().get(responseModelOne)).isEqualTo(responseModelOneBody);
@@ -49,9 +49,9 @@ public class ApiTests extends BaseTest {
     @Order(2)
     public void manufacturerRequest() {
         Manufacturers manufacturers = core.getAndGetResponseAsClass(
-                Manufacturers.class,
-                reqSpec,
-                EndPointUrlManufacturer.MANUFACTURER.getPath()
+            Manufacturers.class,
+            reqSpec,
+            EndPointUrlManufacturer.MANUFACTURER.getPath()
         );
         assertThat(manufacturers.getWkda().get(manufacturer)).isEqualTo(manufacturerTitle);
     }
@@ -60,14 +60,13 @@ public class ApiTests extends BaseTest {
     @Order(3)
     public void mainTypesManufacturerRequest() {
         Manufacturers manufacturers = core.getAndGetResponseAsClass(
-                Manufacturers.class,
-                reqSpec,
-                EndpointURLmainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer))
+            Manufacturers.class,
+            reqSpec,
+            EndPointUrlMainTypes.MAIN_TYPES.addPath(String.format("?manufacturer=%s", manufacturer))
         );
 
         assertThat(manufacturers.getTotalPageCount()).isEqualTo(1);
         assertThat(manufacturers.getWkda().get(mainType)).isEqualTo(mainType);
-
     }
 
     @Test

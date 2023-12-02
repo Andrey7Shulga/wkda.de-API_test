@@ -3,9 +3,7 @@ package pogo.requests;
 import java.util.Map;
 
 public class NewManufacturer {
-
     private Map<String, String> wkda;
-
     public Map<String, String> getWkda() {
         return wkda;
     }

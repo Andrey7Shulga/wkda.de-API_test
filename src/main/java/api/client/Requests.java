@@ -14,12 +14,12 @@ public class Requests {
     public RequestSpecification baseRequestSpec() {
 
         return new RequestSpecBuilder()
-                .setRelaxedHTTPSValidation()
-                .setContentType(ContentType.JSON)
-                .setBaseUri(BASE_URI)
-                .addHeader("accept", APP_HEADER)
-                .addFilter(new ResponseLoggingFilter())
-                .addFilter(new RequestLoggingFilter())
-                .build();
+            .setRelaxedHTTPSValidation()
+            .setContentType(ContentType.JSON)
+            .setBaseUri(BASE_URI)
+            .addHeader("accept", APP_HEADER)
+            .addFilter(new ResponseLoggingFilter())
+            .addFilter(new RequestLoggingFilter())
+            .build();
     }
 }
